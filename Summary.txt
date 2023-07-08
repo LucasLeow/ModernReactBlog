@@ -80,4 +80,33 @@
 
                 1) remove all content in App.js <div> tags, keeping only <div> tags
                 2) Must always export default <Component> & import <Component> from <path> in index.js
-    
+
+            
+== 4 Dynamic Values in Component templates ==
+    - Go to App.js (App component)
+    - just use {var_name}
+        - Dont have to include $ like normal JS
+
+                function App() {
+                    const title = "Home";
+                    const likes = 50;
+                    const link = https://www.google.com;
+                    return (
+                            <div className="App">
+                            <div className="content">
+                                <h1>{ title }</h1>
+                                <p> Liked {likes} times </p>
+                                <a href={link}> Google Site </a>
+                            </div>
+                            </div>
+                    );
+                }
+
+        - React will convert all dynamic data to String in HTML
+        - Cannot output:
+            - boolean
+            - JS objects
+
+    Typical use case:
+        - Array of blog titles from database + links to blogs
+        - Need to dynamically output HTML template with {titles} & <a href={links}>
