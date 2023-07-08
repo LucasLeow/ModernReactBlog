@@ -110,3 +110,61 @@
     Typical use case:
         - Array of blog titles from database + links to blogs
         - Need to dynamically output HTML template with {titles} & <a href={links}>
+
+== 5 Multiple React Components ==  
+    - React Component makes up the Component Tree
+    - Typically don't want any logic / template written in Root Component
+        - except for importing other root components
+
+    - App.js : Root Component (top of tree)
+        - Navbar.js
+            - Button.js
+        - BlogDetails.js
+            -  Body.js
+        - Sidebar.js
+            - Categories.js
+            - Tags.js
+
+            1) Create Navbar Component
+                - create Navbar.js in "src" dir
+                - type "sfc" then tab (using Simple React Snippets to create boilerplate)
+                    - stateless function component
+
+                    const Navbar = () => {
+                        return (
+                            <nav className="navbar">
+                                <h1>Lucas Blog</h1>
+                                <div className="links">
+                                    <a href="/">Home</a>
+                                    <a href="/create">New Blog</a>
+                                </div>
+                            </nav>
+                        );
+                    }
+                    export default Navbar;
+                
+                2) Go to App.js & import Navbar component
+                    import Navbar from "./Navbar";
+
+                      return (
+                        <div className="App">
+                        <Navbar />
+                        <div className="content">
+                        </div>
+                        </div>
+                    );
+                
+                3) Create Home.js component in "src" dir
+                    - sfc then tab
+                
+                4) import Home component in App.js (root) & nest inside div
+
+                    function App() {
+                        return (
+                            <div className="App">
+                            <Navbar />
+                            <Home />
+                            </div>
+                        );
+                        }
+
