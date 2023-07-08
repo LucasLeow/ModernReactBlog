@@ -3,38 +3,28 @@
     - used by Netflix & Insta
     - used to create JS-driven dynamic web apps
     - other similar frameworks: Angular | Vue
+    - create Single Page Apps quickly (single HTML page sent from server)
+        - React handles everything else
+            - website data
+            - user interactivity
+            - routing between pages
 
-    -- What is Redux --
-        - A layer on top of React
-        - Helps with state management
-            - data in app
-            - UI state of app
+    - New pages handled by React instead of being sent from Server
+    - eg: if user click on button for "/contact"
+        - React injects "/contact" form component
+        - Loading much faster compared to conventional retrieval page from Server using HTTP request
             
     React basics
         - components | events | templates | props | forms
     React Router
         - routes | route params | redirects
-    Redux
-        - stores | actions | reducers
+    React Hooks (to handle state)
+        - useState | useEffect | custom Hooks
 
 
-== 2 How React Works
-    - Lifeblood of React is components
-    - Create components representing different UI
-        - navbar component
-        - searchbox component
-        - footer component etc.
+== 2 Getting started with React ==
 
-    - React inject components into DOM
-    - Components are in JS representation (virtual DOM)
-    - virtual DOM rendered to actual DOM
-    - React refers to virtual DOM to see if any changes
-        - will only update the necessary changes to actual DOM
-        - instead of constant re-rendering entire DOM
-    
-    - Won't really touch on the virtual DOM, just an explanation of what happens under the hood
-
-    -- React Components --
-        - JS functions written in JSX expressions
-        - Can contain state (data / UI state)
-        - Can contain JS for functionality
+    1) Create project dir
+    2) npx create-react-app lucas-blog
+        - using npx, don't have to use create-react-app tool
+        - will take some time to download all dependencies required by React (into node_modules)
