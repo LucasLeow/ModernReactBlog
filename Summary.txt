@@ -28,3 +28,31 @@
     2) npx create-react-app lucas-blog
         - using npx, don't have to use create-react-app tool
         - will take some time to download all dependencies required by React (into node_modules)
+
+            -- Info about React project --
+                - node_modules
+                    - where all dependencies that comes with React is located
+                    - any additional packages will be installed here
+                
+                - "public" dir: where all public files are located
+                    - index.html : the entry point HTML served to browser
+                        - all react code injected to this single index.html, the rest handled by React
+                    
+                - "src" dir: 99% of code will be here
+                    - contains React Components
+                    - App.js: The default React component created
+                    - App.css: css file to style components
+                    - App.test: for testing
+                    - index.js: To kickstart application
+                        - take all React components & mount to DOM
+                    - reportWebVitals.js: Performance monitoring, not vital. Can delete if not needed
+                        - if deleted, must go to index.js and delete corresponding usage
+
+                - package.json
+                    - contains all dependencies
+                    - contains scripts to run shortcut for commands
+            
+    3) Preview react project (go to project dir)
+        - npm start
+        - npm run build
+            * only standard cmds can run npm <cmd>, else must include "run" keyword
