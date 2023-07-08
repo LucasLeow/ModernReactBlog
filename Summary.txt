@@ -56,3 +56,28 @@
         - npm start
         - npm run build
             * only standard cmds can run npm <cmd>, else must include "run" keyword
+
+== 3 React Components & Templates ==
+
+    - React Components (Building blocks for any React app)
+        - A JS function that returns JSX expression (Function name starts with Capital letter)
+            - JSX is nothing but HTML tags within return function
+
+        - Each component a section of content on webpage
+            - Nav component
+            - Article component
+            - Sidebar component
+            etc.
+
+        Components contain:
+            - template (JSX HTML expression)
+            - logic (JS functions using template literals)
+
+        - App.js is root Component
+        - babel converts JSX to HTML & renders to DOM
+        - Older versions of React need to import React from "react" for each component
+            - version 17 & above, not needed
+
+                1) remove all content in App.js <div> tags, keeping only <div> tags
+                2) Must always export default <Component> & import <Component> from <path> in index.js
+    
