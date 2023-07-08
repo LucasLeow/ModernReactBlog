@@ -1,0 +1,40 @@
+== 1 React Intro ==
+    - JS library created by FB
+    - used by Netflix & Insta
+    - used to create JS-driven dynamic web apps
+    - other similar frameworks: Angular | Vue
+
+    -- What is Redux --
+        - A layer on top of React
+        - Helps with state management
+            - data in app
+            - UI state of app
+            
+    React basics
+        - components | events | templates | props | forms
+    React Router
+        - routes | route params | redirects
+    Redux
+        - stores | actions | reducers
+
+
+== 2 How React Works
+    - Lifeblood of React is components
+    - Create components representing different UI
+        - navbar component
+        - searchbox component
+        - footer component etc.
+
+    - React inject components into DOM
+    - Components are in JS representation (virtual DOM)
+    - virtual DOM rendered to actual DOM
+    - React refers to virtual DOM to see if any changes
+        - will only update the necessary changes to actual DOM
+        - instead of constant re-rendering entire DOM
+    
+    - Won't really touch on the virtual DOM, just an explanation of what happens under the hood
+
+    -- React Components --
+        - JS functions written in JSX expressions
+        - Can contain state (data / UI state)
+        - Can contain JS for functionality
