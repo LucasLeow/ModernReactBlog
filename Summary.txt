@@ -354,12 +354,6 @@
 == 11 React Props ==
     - allow data to be passed from parent component to child component
 
-    - blogs content may be on several different pages aside from homepage
-        - i.e several pages requiring same logic
-        - repeating code in several components / pages will not be efficient
-        - can make a reusable component (blog list component)
-            - other component can use
-        
         - Can pass in data into reusable components to make display dynamic data
             - Using React props
 
@@ -421,3 +415,23 @@
                     }
                     
                     export default BlogList;
+
+== 12 Reusing React Components ==
+
+        - blogs content may be on several different pages aside from homepage
+        - i.e several pages requiring same logic
+        - repeating code in several components / pages will not be efficient
+        - can make a reusable component (BlogList component)
+            - other components can use
+            - different data can be passed using props
+
+            1) go to Home.js & add new BlogList component
+                - using filter() to get new array (of JS object) based on given condition
+                - can be used for search page
+
+                return (
+                    <div className="home">
+                        <BlogList blogs={blogs} title={"All Blogs"}/>
+                        <BlogList blogs={blogs.filter(item => item.author=="mario")} title={"Mario's Blogs"} />
+                    </div>
+                );

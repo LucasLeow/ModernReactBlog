@@ -41,17 +41,23 @@
 }
 
 .blog-preview {
-  width: 600px;
   padding: 10px 16px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 1rem;
+  margin: 20px 10px;
   border: 2px solid #fafafa;
   border-radius: 4px;
 }
 
+.blog-list {
+  margin: 5px 4rem;
+}
 .blog-preview:hover {
   box-shadow: 1px 3px 5px rgba(0,0,0,0.3);
   border-color:pink;
   /* background-color: #FFCBC4; */
+}
+
+.blog-preview h2{
+  font-size: 20px;
+  color: #f1356d;
+  margin-bottom: 8px;
 }
