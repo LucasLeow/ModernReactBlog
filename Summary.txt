@@ -168,3 +168,5 @@
                         );
                         }
 
+== 6 Adding Styles to Component ==
+
