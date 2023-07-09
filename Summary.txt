@@ -238,4 +238,59 @@
             - automatically passed to handler functions (handleClick & handleClickAgain in this eg.)
             - if using anonymous function, the anonymous function gets the event object
 
- 
+
+== 8 useState hook ==
+
+    - Component state = Additional data being used by Component at that instant
+    - can be:
+        - array of values
+        - boolean
+        - Strings
+        - Objects etc.
+
+    - For data that will change over time / in response to some event
+        - eg: Initial title: Hello
+            - After clicking button, want title to change to Goodbye
+
+    -- Hooks in React --    
+        - to make data "reactive" (value react according to changes / event)
+        - several built-in hooks in React
+        - Possible to create own custom hook
+        - Hook = certain type of function that perform certain task
+        - prefix with "use"
+            - useState
+            - useEffect
+            - useCustomHook etc.
+        
+        1) go to Home.js (Home component)
+            - remove the click me again button & its handler function
+        
+        2) Modify code in Home.js
+
+            import { useState } from "react";
+            const Home = () => {
+                const [ name, setName ] = useState("initialName");
+                    // name is the variable to store the value
+                    // setName is a function to change "name" variable
+                        // convention is var, setVar (prefixed with set)
+                const [ age, setAge ] = useState(25);
+
+                     const handleClick = () => {
+                            console.log("button clicked");
+                            setName("NewValue");
+                            setAge("26");
+                     }
+                return (
+                            <div className="home">
+                                <h2>Homepage</h2>
+                                <p>{name}</p>
+                                <button onClick={handleClick}>Click me</button>
+                            </div>
+                    );
+            }
+                
+            * setFoo function triggers React to re-render DOM to update new value of var
+            * useState(<initialValue>)
+                - can be of any type: String / Boolean / Number / Array / Object etc.
+
+        
