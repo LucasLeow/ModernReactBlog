@@ -251,6 +251,8 @@
     - For data that will change over time / in response to some event
         - eg: Initial title: Hello
             - After clicking button, want title to change to Goodbye
+            - [ title, setTitle ] = useState("Hello");
+
 
     -- Hooks in React --    
         - to make data "reactive" (value react according to changes / event)
@@ -293,4 +295,54 @@
             * useState(<initialValue>)
                 - can be of any type: String / Boolean / Number / Array / Object etc.
 
-        
+== 9 React Dev Tools == 
+ - Browser extension in chrome / firefox
+ - Integrated with browser dev tools to give extra features
+    - only for webpages designed with React
+
+- 2 additional tabs
+    - Components (more commonly used)
+        - Provides the Component Tree used in webpages
+        - To see what Components are being used in the webpage
+        - can be used to see:
+            - DOM equivalent when rendered
+            - log component details to console
+            - See source code of component (how it was written in JS)
+            - State value if useState hook used
+
+    - Profiler
+
+== 10 Outputting Lists data ==
+    - Rendering JSX of list data
+    - using useState hook since data might change
+    - using "map" method in JS
+        - cycles through array (item, idx, array)
+    - when adding new tags through iteration of list items, need to give unique key
+        - so that React can keep track of each item (id must be unique)
+        - eg: <div className="blog-preview" key={item.id}>
+
+        1) Go to Home.js component
+            - remove all previous states & functions
+
+            ** Make sure arrow function has () for returning the entire JSX
+            eg: blogs.map(item=> ()) // () instead of {}
+
+                    import { useState } from "react";
+                    const Home = () => {
+                        const [ blogs, setblogs ] = useState([
+                            {title: "Blog 1", body: "Duis commodo tempor officia.", author: "mario", id: 1},
+                            {title: "Blog 2", body: "Duis  tempor officia.", author: "yoshi", id: 2},
+                            {title: "Blog 3", body: " commodo tempor officia.", author: "luigi", id: 3}
+                        ]);
+
+                        return (
+                            <div className="home">
+                                {blogs.map((item) => (
+                                    <div className="blog-preview" key={item.id}>
+                                        <h2>{ item.title }</h2>
+                                        <p>Written by { item.author }</p>
+                                    </div>
+                                ))}
+                            </div>
+                        );
+                    }
