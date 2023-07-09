@@ -188,6 +188,54 @@
 
             1) remove App.css & import statement in App.js
             2) remove all content within index.css
+            3) Add css content into index.css (see file for details)
+            4) add in-line styles in "Navbar" component (Navbar.js) as JSX
+                - first {} represents dynamic data
+                - second {} represents JS object (key : CSS property, value is the desired value)
+                - in JSX, CSS properties are camelCased, values are always in String
+                        <a href="/create" style={{
+                            color: "white",
+                            backgroundColor: "f1356d",
+                            borderRadius: "8px"
+                        }}
+                * Just for example on in-line styles, don't have to add in project
     
+== 7 Click Event ==
+    - Many browser events may occur
+        - (see JSBrowser.txt in Backend/Javascript)
+        - Mouse | Keyboard | Form events etc.
 
+    - In react, known as React Events
+    (https://legacy.reactjs.org/docs/handling-events.html)
+        - slightly different compared to HTML events
 
+    - this section focuses on "click" event for simplicity
+
+                * If want to pass argument to "handle" function:
+                    - need to use anonymous function (see handleClickAgain)
+
+                        const Home = () => {
+                            const handleClick = ( ev ) => {
+                                console.log("test", ev);
+                            }
+                            const handleClickAgain = (name) => {
+                                console.log("Hello ", name);
+                            }
+                            return (
+                                <div className="home">
+                                    <h2>Homepage</h2>
+                                    <button onClick={handleClick}>Click me</button>
+                                    <button onClick={(ev)=>{
+                                        console.log(ev); // or can pass to handleClickAgain fn to be accessed
+                                        handleClickAgain("mario")
+                                        }}>Click me again</button>
+                                </div>
+                            );
+                        }
+
+        ** Event object
+            - passed as first argument
+            - automatically passed to handler functions (handleClick & handleClickAgain in this eg.)
+            - if using anonymous function, the anonymous function gets the event object
+
+ 
