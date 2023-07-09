@@ -72,6 +72,8 @@
         Components contain:
             - template (JSX HTML expression)
             - logic (JS functions using template literals)
+            - JSX must always be wrapped with parent tag
+                - only can have single parent tag
 
         - App.js is root Component
         - babel converts JSX to HTML & renders to DOM
@@ -346,3 +348,76 @@
                             </div>
                         );
                     }
+        2) Go to index.css
+            - add styles for .blog-preview & .blog-preview:hover
+    
+== 11 React Props ==
+    - allow data to be passed from parent component to child component
+
+    - blogs content may be on several different pages aside from homepage
+        - i.e several pages requiring same logic
+        - repeating code in several components / pages will not be efficient
+        - can make a reusable component (blog list component)
+            - other component can use
+        
+        - Can pass in data into reusable components to make display dynamic data
+            - Using React props
+
+            1) create BlogList.js
+
+                        const BlogList = (props) => {
+                        const blogs = props.blogs;
+                        return ( 
+                            
+                            <div className="blog-list">
+                            <h1>{props.title}</h1>
+                                {blogs.map((item) => (
+                                    <div className="blog-preview" key={item.id}>
+                                        <h2>{ item.title }</h2>
+                                        <p>Written by { item.author }</p>
+                                    </div>
+                                ))}
+                            </div>
+                        );
+                    }
+                    
+                    export default BlogList;
+
+                2) go back to Home.js:
+                    - import BlogList from "./BlogList"
+                    - use BlogList component in place of previous map method
+
+                                return (
+                                    <div className="home">
+                                        <BlogList blogs={blogs} title={"titleProps"}/>
+                                    </div>
+                                );
+                    
+                3) pass props to BlogList
+
+                    <BlogList blogs={blogs}/>
+                    // key : blogs, value : "blogs" state variable storing array
+
+                - Go back to BlogList component to use props
+                    - refer to step 1 for props syntax 
+
+
+            ** Destructuring props 
+                - easier way to manipulate props data
+
+                    const BlogList = ({blogs, title}) => { // instead of using "props" object
+                        return ( 
+                            
+                            <div className="blog-list">
+                                <h2>{title}</h2>
+                                {blogs.map((item) => (
+                                    <div className="blog-preview" key={item.id}>
+                                        <h2>{ item.title }</h2>
+                                        <p>Written by { item.author }</p>
+                                    </div>
+                                ))}
+                            </div>
+                        );
+                    }
+                    
+                    export default BlogList;
