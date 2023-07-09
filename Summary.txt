@@ -168,5 +168,26 @@
                         );
                         }
 
-== 6 Adding Styles to Component ==
+== 6 Adding CSS Styles to Components ==
+    - CSS file applies to:
+        - React Component that imports it
+        - Any other components on the same webpage
+            - because React imports CSS style & adds as <style>
+                - any other stylesheet imported will be appended as more <style> tags below
+            - doesn't scope a stylesheet to a single component
+        
+    - To scope style to different components: (larger projects)
+        - use CSS modules
+        - styled components
+
+    - For smaller projects:
+        - single stylesheet will work (index.css)
+            - works like global stylesheet, applying to all components on same webpage
+            - imported into index.js (entry point where React renders all components)
+        - style components by using relevant classes / id / cascade
+
+            1) remove App.css & import statement in App.js
+            2) remove all content within index.css
+    
+
 
