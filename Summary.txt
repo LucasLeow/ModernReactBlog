@@ -593,3 +593,117 @@
 
                         { pending && <div> Loading ... </div>}
                         {blogs && <BlogList blogs={blogs} title={"All Blogs"}/>}
+
+== 19 Handling Fetch errors ==
+    - sometimes, cannot connect to server
+        - use .catch(err) from fetch fn
+    - sometimes, able to connect but server returns an error
+        - need to use res object to check for status
+
+            1) go to Home.js
+
+            const [ error, setError ] = useState(null);
+
+            inside fetch chain:
+                - .then( res => {
+                    console.log(res); // to see response properties
+                    if (!res.ok) {
+                        throw Error("could not fetch requested resource");
+                    }
+                    return res.json();
+                })
+                .then((data) => {
+                    setBlogs(data);
+                    setPending(false);
+                    setError(null); // if successfully get data, remove error message
+                })
+                .catch((err) => {
+                    setError(err);
+                    setPending(false);
+                })
+
+                2) Create conditional templating for error message
+
+                            { pending && <h4> Loading ... </h4>}
+                             { error && <h4> { error } </h4>}
+                
+== 20 Custom Hook ==
+    - currently, utilize useState & useEffect to fetch data & display data dynamically in Home component
+        - [blog, setBlog] + [pending, setPending] + [error, setError]
+        - conditional templating to display data using JSX
+
+    - if other components want to use, need to include all these code (repetitive)
+        - Solution: custom hook
+            - externalizing logic into own file for reusability
+
+                * must prefix with "use" for custom hooks
+                1) Create new file : useFetch.js
+
+                            import { useState, useEffect } from "react";
+
+                            const useFetch = (url) => {
+
+                                    const [ data, setData ] = useState(null);
+                                    const [loading, setLoading] = useState(true);
+                                    const [error, setError] = useState(null);
+
+                                    useEffect(() => {
+                                        setTimeout(() => {
+                                            fetch(url)
+                                            .then(res=> {
+                                                if(!res.ok) {
+                                                    throw Error("Could not fetch requested data");
+                                                }
+                                                return res.json()
+                                            })
+                                            .then((data) => {
+                                                setData(data);
+                                                setLoading(false);
+                                                setError(null);
+                                            })
+                                            .catch(err => {
+                                                setError(err.message);
+                                                setLoading(false);
+                                            });
+                                        }, 1000)
+                                    }, [ url ]); // dependency array to check for changes in URL (diff. component invoking)
+                                return {data, loading, error};
+                            }
+                        
+                        export default useFetch;
+
+                
+                2) import { useState, useEffect } from "react";
+                3) Bring over all states from Home.js to useFetch.js
+                    - add within useFetch function
+                
+                4) export useFetch function
+                    export default useFetch;
+
+                5) rename [blogs, setBlogs] to [data, setData] to make it more generic
+                6) return { data, pending, error }, the 3 essential data required by all other components
+                    - to display required front-end
+                    6.1) change dependency array to [url], useEffect will run whenever URL changes
+                7) pass in url as argument to useFetch function, so that other component can pass in url
+
+                8) import useFetch to Home.js
+                    - remove useState & useEffect imports in Home.js
+
+
+                            import useFetch from "./useFetch";
+                            import BlogList from "./BlogList";
+
+                            const Home = () => {
+
+                                const { data: blogs , pending, error } = useFetch("http://localhost:8000/blogs") // destructure data, renamed as blogs
+                                return (
+                                    <div className="home">
+                                        { pending && <h4> Loading ... </h4>}
+                                        { error && <h4> { error } </h4>}
+                                        {blogs && <BlogList blogs={blogs} title={"All Blogs"}/>}
+                                        {blogs && <BlogList blogs={blogs.filter(item => item.author === "mario")} title={"Mario's Blogs"}/>}
+                                    </div>
+                                );
+                            }
+            
+            export default Home;
