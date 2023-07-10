@@ -435,3 +435,32 @@
                         <BlogList blogs={blogs.filter(item => item.author=="mario")} title={"Mario's Blogs"} />
                     </div>
                 );
+
+== 13 JS function as props ==
+    - used to perform action when interacting with components
+        - eg: deleting blog posts upon click of button
+
+    - passing setState fn from parent to child
+        - because data exist in parent component
+        - but delete functionality in child component
+        - need to pass setState fn from parent to child
+
+            1) Create button in BlogList component
+             <button onClick={()=>{handleDelete(item.id)}}>Delete</button>
+
+            2) handleDelete fn declared in parent components
+                - setState & state itself can be manipulated within handleDelete fn in parent component
+                - handleDelete fn can be passed as prop to child component
+
+            3) go to Home.js (does not change original data, not interacting with database)
+
+                const handleDelete = (id) => {
+                    const newBlogs = blogs.filter(item => item.id !== id);
+                    setBlogs(newBlogs);
+                }
+
+                down below, return:
+
+                    <BlogList blogs={blogs} title={"All Blogs"} handleDelete={handleDelete}/>
+
+                4) const BlogList = ({ blogs, title, handleDelete }) => {...<button onClick={()=>{handleDelete(item.id)}}>Delete</button>}
