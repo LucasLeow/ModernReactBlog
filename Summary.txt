@@ -502,3 +502,48 @@
                 []: only run useEffect on initial render
                 [name] : only run on initial render + any state changes in <name> state
                 [name, title] : run on initial render + any state change in <name> or <title>
+
+== 16 Intro to JSON Server + setup ==
+    - useEffect good for fetching data since it executes on first render
+        - fetch data from database using HTTP request (express)
+
+    - JSON server (provides JSON file) (use for route testing instead of actually creating backend)
+
+        1) Create new "data" dir
+            - create "db.json" inside
+
+            - In JSON Server, top level property is considered a resource
+                - endpoint automatically created to interact with said resource
+                - mimicks a backend server & database
+
+            eg: (blogs in this case is the top level property)
+            {
+                "blogs": [
+                    {
+                        "title": "First Blog",
+                        "body": "Fugiat incididunt est tempor esse elit duis eu.",
+                        "author": "mario",
+                        "id":1
+                    },
+                    {
+                        "title": "Second Blog",
+                        "body": "Ut amet anim duis ut esse nostrud.",
+                        "author": "luigi",
+                        "id":2
+                    }
+                ]
+            }
+
+        2) Open new terminal 
+            - cd to proj dir
+            - npx json-server --watch data/db.json --port 8000
+                - default is port 3000, which is currently taken by React
+
+            2.1) Some endpoints being used in this project (using JSON Server)
+                - /blogs - GET - fetch all blogs
+                - /blog/:id - GET - fetch single blog
+                - /blogs - POST - add new blog
+                - /blogs/:id - DELETE - deletes a blogs
+
+== 17 Fetching data with useEffect hook ==
+    - typically used with [] dependency array (run only on initial render)
