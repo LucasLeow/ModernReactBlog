@@ -705,5 +705,51 @@
                                     </div>
                                 );
                             }
-            
             export default Home;
+
+== 21 React Router ==
+    - to link different webpages together
+    - React has own way of renderings different pages
+        1) Make initial request to server
+        2) server responds with index.html + js bundle (React files)
+            - React & React Router control app
+            - initial index.html virtually empty, React injects component  
+        3) Any request for other "webpages" will be handled by React Router
+            - thus, no contact with server
+        4) React Router will inject the required component / content on screens
+
+        - Top level component assigned for each route
+            - component dynamically injected into browser
+    
+    * Makes less requests to server, thus making everything seem faster
+
+    Setting up React Router:
+        1) install react router (not part of core react library)
+            - npm install react-router-dom
+
+        2) go to App.js (root component)
+            import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+
+        3) Surround entire app with <Router>
+            - all components nested within App (root component) have access to Router
+
+                        function App() {
+                        return (
+                            <Router> // step 3
+                                <div className="App">
+                                <Navbar />
+                                    <div className="content">
+                                        <Routes> // step 4 (in v5 react-router-dom, was known as Switch)
+                                            <Route path="/" element={<Home />}></Route>
+                                        </Routes>
+                                    </div>
+                                </div>
+                            </Router>
+                        );
+                        }
+            4) Implement <Routes> </Routes>
+                - any component within this tag can be assigned a route
+
+                                <Routes> // step 4 (in v5 react-router-dom, was known as Switch)
+                                    <Route path="/" element={<Home />}></Route>
+                                </Routes>
