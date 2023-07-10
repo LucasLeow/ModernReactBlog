@@ -749,7 +749,33 @@
                         }
             4) Implement <Routes> </Routes>
                 - any component within this tag can be assigned a route
+                - ensure that only 1 <Route> component renders at any 1 time
+                    - else, React may render multiple <Route>
 
                                 <Routes> // step 4 (in v5 react-router-dom, was known as Switch)
                                     <Route path="/" element={<Home />}></Route>
                                 </Routes>
+
+== 22 Exact Match Routes ==
+    - adding "create blog" route
+
+        1) create "Create.js"
+            - sfc then tab, -> "Create" component
+            - create simple template for route testing
+
+                    const Create = () => {
+                        return (
+                            <div className="create">
+                                <h2>Add a new blog</h2>
+                            </div>
+                        );
+                    }
+                    
+                    export default Create;
+
+        2) Go back to App.js to implement route
+            import Create from "./Create";
+
+            <Route path="/create" element={<Create />}></Route>
+
+== 23 Router Links ==
