@@ -779,3 +779,16 @@
             <Route path="/create" element={<Create />}></Route>
 
 == 23 Router Links ==
+    - Have to use special <Link> tag to allow React Router to intercept request
+    - if use <a> tags, request is still made to server
+    - <Link> prevent request made to server
+        - looks at path then matches against that declared in <Routes>
+
+    1) Go to Navbar component
+        -  import  { Link } from "react-router-dom";
+
+        replace <a> tags with <Link> tags
+            - href changed to "to"
+
+                <Link to="/">Home</Link>
+                <Link to="/create">New Blog</Link>
