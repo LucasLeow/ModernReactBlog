@@ -547,3 +547,28 @@
 
 == 17 Fetching data with useEffect hook ==
     - typically used with [] dependency array (run only on initial render)
+
+        1) go to Home.js, remove initial useState for blogs
+            const [ blogs, setBlogs ] = useState(null);
+
+                useEffect(() => {
+                    fetch("http://localhost:8000/blogs")
+                    .then(res=>res.json()) // converts json to js object
+                    .then((data)=>{
+                        console.log(data);
+                        setBlogs(data);
+                    })s
+                }, [])
+
+        2) initially, blogs are null state. results in rendering error
+            - perform conditional templating
+                - initially blogs is null, resulting in "false" logic
+                - once blogs is not null, then result in "true" logic
+                - right side logic will execute only if left side logic is true
+
+            {blogs && <BlogList blogs={blogs} title={"All Blogs"} handleDelete={handleDelete}/>}
+            {blogs && <BlogList blogs={blogs.filter(item => item.author === "mario")} title={"Mario's Blogs"}/>}
+
+        3) remove handleDelete in Home.js
+            - remove delete button in BlogList.js
+            (deleting data locally, will implement delete request later)
