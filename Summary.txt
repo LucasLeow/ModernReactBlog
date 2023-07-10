@@ -464,3 +464,27 @@
                     <BlogList blogs={blogs} title={"All Blogs"} handleDelete={handleDelete}/>
 
                 4) const BlogList = ({ blogs, title, handleDelete }) => {...<button onClick={()=>{handleDelete(item.id)}}>Delete</button>}
+
+== 14 useEffect hook ==
+    - runs a function whenever there is a render of the component
+        - initial render to DOM
+        - any state changes (resulting in re-render)
+        ** Becareful of changing state within useEffect (may cause endless loop)
+
+    - not stored in any constant, does not return anything. just executes functions
+
+            1) Go to Home.js
+                import { useState, useEffect } from "react";
+
+                    useEffect(() => {
+                        console.log("useEffect ran");
+                    })
+
+                    - executes on initial render + any state changes causing re-render
+
+    - Typically used for: (side effects in React)
+        - fetch data
+        - communicate with auth services
+
+    - can also access state within component
+
