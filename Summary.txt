@@ -572,3 +572,24 @@
         3) remove handleDelete in Home.js
             - remove delete button in BlogList.js
             (deleting data locally, will implement delete request later)
+
+== 18 Conditional Loading Messages ==
+    - create a loading message while data is being fetched
+    - allow user to know page is loading
+
+        1) At Home.js
+
+            const [pending, setPending] = useState(true);
+
+            - inside fetch request, once data fetched, setPending(false)
+
+                    .then((data)=>{
+                        console.log(data);
+                        setBlogs(data);
+                        setPending(false);
+                    })
+
+            - inside jsx, include conditional templating for loading message
+
+                        { pending && <div> Loading ... </div>}
+                        {blogs && <BlogList blogs={blogs} title={"All Blogs"}/>}
