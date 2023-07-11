@@ -1094,13 +1094,43 @@
             import { useNavigate } from "react-router-dom";
 
             const navigate = useNavigate();
-
             .
             .
-            .
-
+            
             .then(()=>{
                 console.log("New blog created);
                 setPending(false); // POST no longer pending
                 navigate("/"); // navigates to homepage
             })
+
+== 31 Delete content using React ==
+        1) Go to BlogDetails.js (individual blog component)
+            - create delete button
+
+                <article>
+                    <h2> { data.title } </h2>
+                    <p> Written by { data.author }</p>
+                    <p> { data.body }</p>
+                    <button onClick={handleClick}>Delete</button>
+                </article>
+
+        2) create handleClick function to delete using fetch request
+            - include navigation back to homepage after delete
+
+                    const BlogDetails = () => {
+                        const { id } = useParams();
+                        const { data, pending, error } = useFetch(`http://localhost:8000/blogs/${id}`);
+                        const navigate = useNavigate();
+
+                        const handleClick =() => {
+                            fetch(`http://localhost:8000/blogs/${data.id}`, {
+                                method: "DELETE"
+                            })
+                            .then(()=>{
+                                navigate("/");
+                            })
+                        }
+                    .
+                    .
+                    .
+                    }
