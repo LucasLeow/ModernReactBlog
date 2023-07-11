@@ -1134,3 +1134,22 @@
                     .
                     .
                     }
+
+== 32 Handling error with 404 page == 
+        1) create NotFound.js
+
+                import { Link } from "react-router-dom";
+
+                const NotFound = () => {
+                    return ( 
+                        <div className="not-found">
+                            <h2>Sorry</h2>
+                            <p>Blog cannot be found</p>
+                            <Link to="/">Back to Home</Link>
+                        </div>
+                    );
+                }
+                
+                export default NotFound;
+            
+            2) Go to App.js to add "catch-all" route
