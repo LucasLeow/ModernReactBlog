@@ -32,7 +32,7 @@ const useFetch = (url) => {
                     setPending(false);
                 }
             });
-        }, 1000)
+        }, 200)
         return () =>  abortController.abort(); // abort fetch if change requested before load completes
     }, [url]);
 

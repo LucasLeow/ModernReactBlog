@@ -848,3 +848,53 @@
                         return { data, pending, error };
                     }
 
+== 25 Route Parameters ==  
+    - unique value within route (to retrieve / manipulate specific resource)
+        eg: /blogs/:id
+        - /blogs/123 (id is 123)
+
+            1) Create BlogDetails.js (Blog Details component)
+                - create simple template for route testing
+                (sfc then tab)
+
+                const BlogDetails = () => {
+                        return ( 
+                            <div className="blog-details">
+                                <h2> Blog Details</h2>
+                            </div>
+                        );
+                    }
+                    s
+                    export default BlogDetails;
+                
+            2) Create route to BlogDetails in App.js
+
+                     <Route path="/blog/:id" element={<BlogDetails />}></Route>
+            
+            3) implement useParams hook to pass id from Route to BlogDetails component
+                - go to BlogDetails.js
+                - import { useParams } from "react-router-dom";
+                -     const { id } = useParams();
+                    - <id> must match whatever route params was provided
+                        - since our route path is /blog/:id, then inside useParams must be { id }
+            
+            4) Go to BlogList.js to set up links to access different blogs based on ID of blog
+                - create <Link> tag
+
+                import { Link } from "react-router-dom";
+                
+                const BlogList = ({blogs, title, handleDelete}) => {
+                    return ( 
+                        <div className="blog-list">
+                            <h2>{ title }</h2>
+                            {blogs.map((item) => (
+                                <div className="blog-preview" key={item.id}>
+                                    <Link to={`/blogs/${item.id}`}>
+                                        <h2>{ item.title }</h2>
+                                        <p>Written by { item.author }</p>
+                                    </Link>
+                                </div>
+                            ))}
+                        </div>
+                    );
+                }
