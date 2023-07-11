@@ -882,7 +882,7 @@
                 - create <Link> tag
 
                 import { Link } from "react-router-dom";
-                
+
                 const BlogList = ({blogs, title, handleDelete}) => {
                     return ( 
                         <div className="blog-list">
@@ -895,6 +895,32 @@
                                     </Link>
                                 </div>
                             ))}
+                        </div>
+                    );
+                }
+
+== 26 Retrieving Blogs via id ==
+    - utilize useFetch hook created earlier
+
+        1) Go to BlogDetails.js
+
+                import useFetch from "./useFetch";
+
+                const BlogDetails = () => {
+                    const { id } = useParams();
+                    const { data, pending, error } = useFetch(`http://localhost:8000/blogs/${id}`);
+
+                    return ( 
+                        <div className="blog-details">
+                            { pending && <h4> Loading.. </h4> }
+                            { error && <h4> {error} </h4> }
+                            { data && (
+                                <article>
+                                    <h2> { data.title } </h2>
+                                    <p> Written by { data.author }</p>
+                                    <p> { data.body }</p>
+                                </article>
+                            )}
                         </div>
                     );
                 }
