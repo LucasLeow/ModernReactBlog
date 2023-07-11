@@ -6,10 +6,21 @@ const Create = () => {
     const [ body, setBody ] = useState("");
     const [ author, setAuthor ] = useState("yoshi");
 
+    const handleSubmit = (ev) => {
+        ev.preventDefault(); // prevent form from refreshing upon submit
+        const blog = {
+            title,
+            body,
+            author
+        }
+
+        console.log(blog);
+    }
+
     return (
         <div className="create">
             <h2>Add a new blog</h2>
-            <form action="">
+            <form onSubmit={handleSubmit}>
                 <label> Blog title: </label>
                 <input 
                 type="text"
