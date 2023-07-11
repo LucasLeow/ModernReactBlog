@@ -924,3 +924,11 @@
                         </div>
                     );
                 }
+
+== 27 Forms in React ==
+    - Controlled Inputs
+        - storing form input by user into React State
+        - track changes & updates state
+
+            1) create form in Create.js
+            2) set up states to store required info
