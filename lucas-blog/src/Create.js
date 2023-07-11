@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Create = () => {
 
@@ -6,6 +7,7 @@ const Create = () => {
     const [ body, setBody ] = useState("");
     const [ author, setAuthor ] = useState("yoshi");
     const [ pending, setPending ] = useState(false); // initially not submitting
+    const navigate = useNavigate();
 
     const handleSubmit = (ev) => {
         ev.preventDefault(); // prevent form from refreshing upon submit
@@ -27,6 +29,7 @@ const Create = () => {
         .then(() => {
             console.log("New blog created");
             setPending(false); //POST completed
+            navigate("/");
         });
     }
 

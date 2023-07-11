@@ -1082,6 +1082,25 @@
                         );
                     }
                     
-== 30 Programmatic Redirects ==
+== 30 Programmatic Redirects (useNavigate hook) ==
     - redirecting user to different page after completing task
         eg: redirect to homepage after submitting form
+    - redirect user with buttons on screen (fwd / back arrows)
+
+    - using useNavigate hook in React
+
+        1) Go to Create.js
+
+            import { useNavigate } from "react-router-dom";
+
+            const navigate = useNavigate();
+
+            .
+            .
+            .
+
+            .then(()=>{
+                console.log("New blog created);
+                setPending(false); // POST no longer pending
+                navigate("/"); // navigates to homepage
+            })
