@@ -985,3 +985,103 @@
         Listen for: (either 1 will do)
             - submit event for button (preferred)
             - click event to button
+
+                1) Go to Create.js
+
+                    const handleSubmit = (ev) => {
+                        ev.preventDefault(); // prevent form from refreshing upon submit
+                        const blog = {
+                            title,
+                            body,
+                            author
+                        }
+
+                        console.log(blog);
+                    }
+
+                .
+                .
+                .
+                    <form onSubmit={handleSubmit}>
+
+== 29 POST Request in React ==
+    - can be created in separate file if multiple such POST request
+    - in this example, written in Create.js
+
+        1) remove console.log(blog) in Create.js
+
+        2) use fetch
+
+                    import { useState } from "react";
+
+                    const Create = () => {
+
+                        const [ title, setTitle ] = useState("");
+                        const [ body, setBody ] = useState("");
+                        const [ author, setAuthor ] = useState("yoshi");
+                        const [ pending, setPending ] = useState(false); // initially not submitting
+
+                        const handleSubmit = (ev) => {
+                            ev.preventDefault(); // prevent form from refreshing upon submit
+                            const blog = {
+                                title,
+                                body,
+                                author
+                            }
+
+                            setPending(true); // begin POST request
+
+                            fetch("http://localhost:8000/blogs", {
+                                method: "POST",
+                                headers: {
+                                    "Content-Type": "application/json"
+                                },
+                                body: JSON.stringify(blog)
+                            })
+                            .then(() => {
+                                console.log("New blog created");
+                                setPending(false); //POST completed
+                            });
+                        }
+
+                        return (
+                            <div className="create">
+                                <h2>Add a new blog</h2>
+                                <form onSubmit={handleSubmit}>
+                                    <label> Blog title: </label>
+                                    <input 
+                                    type="text"
+                                    required
+                                    value={title}
+                                    onChange={(ev) => setTitle(ev.target.value)}
+                                    />
+
+                                <label> Blog body: </label>
+                                <textarea 
+                                    name="" 
+                                    id="" 
+                                    cols="30" 
+                                    rows="10"
+                                    required
+                                    value={body}
+                                    onChange={(ev)=>setBody(ev.target.value)}
+                                ></textarea>
+
+                                    <label> Blog author: </label>
+                                    <select 
+                                    value={author}
+                                    onChange={(ev)=> setAuthor(ev.target.value)}
+                                    >
+                                        <option value="mario">mario</option>
+                                        <option value="yoshi">yoshi</option>
+                                    </select>
+                                    { !pending && <button>Add Blog</button>}
+                                    { pending && <button disabled>Adding Blog...</button>}
+                                </form>
+                            </div>
+                        );
+                    }
+                    
+== 30 Programmatic Redirects ==
+    - redirecting user to different page after completing task
+        eg: redirect to homepage after submitting form

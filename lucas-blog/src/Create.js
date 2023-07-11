@@ -5,6 +5,7 @@ const Create = () => {
     const [ title, setTitle ] = useState("");
     const [ body, setBody ] = useState("");
     const [ author, setAuthor ] = useState("yoshi");
+    const [ pending, setPending ] = useState(false); // initially not submitting
 
     const handleSubmit = (ev) => {
         ev.preventDefault(); // prevent form from refreshing upon submit
@@ -14,7 +15,19 @@ const Create = () => {
             author
         }
 
-        console.log(blog);
+        setPending(true); // begin POST request
+
+        fetch("http://localhost:8000/blogs", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(blog)
+        })
+        .then(() => {
+            console.log("New blog created");
+            setPending(false); //POST completed
+        });
     }
 
     return (
@@ -48,10 +61,8 @@ const Create = () => {
                     <option value="mario">mario</option>
                     <option value="yoshi">yoshi</option>
                 </select>
-                <button>Add Blog</button>
-                <p>{title}</p>
-                <p>{body}</p>
-                <p>{author}</p>
+                { !pending && <button>Add Blog</button>}
+                { pending && <button disabled>Adding Blog...</button>}
             </form>
         </div>
     );
