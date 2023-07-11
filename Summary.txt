@@ -792,3 +792,59 @@
 
                 <Link to="/">Home</Link>
                 <Link to="/create">New Blog</Link>
+
+== 24 useEffect cleanup ==
+    - sometimes, user change page quickly
+    - initial component was still loading & states not yet updated
+        - user click to another page, resulting in another component injected
+        - initial component finished loading & wants to update state
+        - state no longer there due to new component loaded
+        (error results)
+
+    Solution:
+        - stop fetch() from continuing for initial component if new component requested
+        - using cleanUp function + abort controller
+
+            1) go to useFetch.js Hook
+            2) place clean up function inside useEffect()
+
+
+                const useFetch = (url) => {
+
+                    const [ data, setData ] = useState(null);
+                    const [pending, setPending] = useState(true);
+                    const [error, setError] = useState(null);
+
+                    useEffect(() => {
+
+                        const abortController = new AbortController();
+                                 
+                        setTimeout(() => {
+                            fetch(url, { signal: abortController.signal })
+                            .then(res=>{
+                                console.log(res); // to see what properties "res" obj has
+                                if (!res.ok) {
+                                    throw Error("Could not fetch correct data for requested resource.");
+                                }
+                                return res.json()
+                            })
+                            .then((data)=>{
+                                setData(data);
+                                setPending(false);
+                                setError(null);
+                            })
+                            .catch((err)=>{
+                                if (err.name === "AbortError") {
+                                    console.log("fetch aborted");
+                                } else {
+                                    setError(err.message);
+                                    setPending(false);
+                                }
+                            });
+                        }, 1000)
+                        return () =>  abortController.abort(); // abort fetch if change requested before load completes
+                    }, [url]);
+
+                        return { data, pending, error };
+                    }
+
