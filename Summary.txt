@@ -57,6 +57,7 @@
         - npm run build
             * only standard cmds can run npm <cmd>, else must include "run" keyword
 
+
 == 3 React Components & Templates ==
 
     - React Components (Building blocks for any React app)
@@ -112,6 +113,8 @@
     Typical use case:
         - Array of blog titles from database + links to blogs
         - Need to dynamically output HTML template with {titles} & <a href={links}>
+
+
 
 == 5 Multiple React Components ==  
     - React Component makes up the Component Tree
@@ -435,6 +438,8 @@
                         <BlogList blogs={blogs.filter(item => item.author=="mario")} title={"Mario's Blogs"} />
                     </div>
                 );
+
+
 
 == 13 JS function as props ==
     - used to perform action when interacting with components
@@ -1153,3 +1158,6 @@
                 export default NotFound;
             
             2) Go to App.js to add "catch-all" route
+                - must be right at the bottom
+                - * means catch all route
+                <Route path="*" element={<NotFound />}></Route>
